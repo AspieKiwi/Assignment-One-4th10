@@ -2,6 +2,7 @@
 // The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types,
 // events and event handlers, interfaces, attributes, and processing exceptions.
 using System;
+using System.Collections.Generic;
 
 
 //A class is a construct that enables you to create your own custom types by grouping together variables of other types, methods and events.
@@ -23,8 +24,10 @@ public class Scene{
 		private Scene[] _connected_scenes = new Scene[4];
 		private string _description = "Can't go this way";
         private string _scenename;
+        private int _Id;
+        public static List<Scene> AllScenes = new List<Scene>();
 
-        public string Scenename{
+    public string Scenename{
             get
                 {
                     return _scenename;
@@ -100,11 +103,24 @@ public class Scene{
                 }
         }
 
+    public int ID
+    {
+        get
+        {
+            return _Id;
+        }
+
+        set
+        {
+            _Id = value;
+        }
+    }
 
 
 
-//Here I have started working on seeing if I can create interaction with NPCs but so far it has not worked but
-// I thought I would keep the proof that I have tried :)
+
+    //Here I have started working on seeing if I can create interaction with NPCs but so far it has not worked but
+    // I thought I would keep the proof that I have tried :)
 
     //    public Scene Excuse{
     //      get

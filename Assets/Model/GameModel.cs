@@ -101,96 +101,110 @@ public static class GameModel {
 
     public static void makeScenes()
 	{
-		Scene tmp; 
+		Scene tmp;
+        DataService theService = new DataService();
 
-		Start_scene = new Scene();
+        if (theService.DbExists("GameNameDb"))
+        {
+            theService.Connect();
+            theService.LoadScenes();
+            currentPlayer.InitalizePlayerState();
+            currentPlayer.CurrentScene = Scene.AllScenes[0];
+        }
+        else
+        {
+            Start_scene = new Scene();
 
-		Start_scene.Scenename = "TextIO";
-		tmp = new Scene();
-		
-		
-		Start_scene.North = tmp;
-        Start_scene.West = tmp;
-        Start_scene.South = tmp;
-        Start_scene.East = tmp;
-        Start_scene.Description = "You are at the front of the class with your teacher" ;
+            Start_scene.Scenename = "TextIO";
+            tmp = new Scene();
+
+            Start_scene.ID = 1; // do more of these
+            Start_scene.North = tmp;
+            Start_scene.West = tmp;
+            Start_scene.South = tmp;
+            Start_scene.East = tmp;
+            Start_scene.Description = "You are at the front of the class with your teacher";
 
 
-        tmp.Description = "You walk back to your desk";
-        //tmp.Excuse = new Scene(); // working on this excuse path
-        tmp.South = new Scene();
-        tmp.East = new Scene();
-        tmp.West = new Scene();
-        tmp.North = new Scene();
+            tmp.Description = "You walk back to your desk";
+            //tmp.Excuse = new Scene(); // working on this excuse path
+            tmp.South = new Scene();
+            tmp.East = new Scene();
+            tmp.West = new Scene();
+            tmp.North = new Scene();
 
-        tmp.North.Description = "You fell on your desk";
-        tmp.North.South = tmp;		
-		tmp.North.North = new Scene();
-        tmp.North.West = new Scene();
-        tmp.North.East = new Scene();
+            tmp.North.Description = "You fell on your desk";
+            tmp.North.South = tmp;
+            tmp.North.North = new Scene();
+            tmp.North.West = new Scene();
+            tmp.North.East = new Scene();
 
-        tmp.North.North.Description = "You can't go this way";
-        tmp.North.North.South = tmp.North;
+            tmp.North.North.Description = "You can't go this way";
+            tmp.North.North.South = tmp.North;
 
-        tmp.North.West.Description = "You can't go this way";
-        tmp.North.West.East = tmp.North;
+            tmp.North.West.Description = "You can't go this way";
+            tmp.North.West.East = tmp.North;
 
-        tmp.North.East.Description = "You can't go this way";
-        tmp.North.East.West = tmp.North;
+            tmp.North.East.Description = "You can't go this way";
+            tmp.North.East.West = tmp.North;
 
-        tmp.West.Description = "You fell out the window";
-        tmp.West.North = new Scene();
-        tmp.West.South = new Scene();
-        tmp.West.East = tmp;
-        tmp.West.West = new Scene();
+            tmp.West.Description = "You fell out the window";
+            tmp.West.North = new Scene();
+            tmp.West.South = new Scene();
+            tmp.West.East = tmp;
+            tmp.West.West = new Scene();
 
-        tmp.West.North.Description = "You can't go this way";
-        tmp.West.North.South = tmp.West;
+            tmp.West.North.Description = "You can't go this way";
+            tmp.West.North.South = tmp.West;
 
-        tmp.West.South.Description = "You can't go this way";
-        tmp.West.South.North = tmp.West;
+            tmp.West.South.Description = "You can't go this way";
+            tmp.West.South.North = tmp.West;
 
-        tmp.West.West.Description = "You can't go this way";
-        tmp.West.West.East = tmp.West;
+            tmp.West.West.Description = "You can't go this way";
+            tmp.West.West.East = tmp.West;
 
-        tmp.East.Description = "You walk into your teacher";
-        tmp.East.West = tmp;
-        tmp.East.South = new Scene();
-        tmp.East.North = new Scene();
-        tmp.East.East = new Scene();
+            tmp.East.Description = "You walk into your teacher";
+            tmp.East.West = tmp;
+            tmp.East.South = new Scene();
+            tmp.East.North = new Scene();
+            tmp.East.East = new Scene();
 
-        tmp.East.South.Description = "You can't go this way";
-        tmp.East.South.North = tmp.East;
+            tmp.East.South.Description = "You can't go this way";
+            tmp.East.South.North = tmp.East;
 
-        tmp.East.North.Description = "You can't go this way";
-        tmp.East.North.South = tmp.East;
+            tmp.East.North.Description = "You can't go this way";
+            tmp.East.North.South = tmp.East;
 
-        tmp.East.East.Description = "You can't go this way";
-        tmp.East.East.West = tmp.East;
+            tmp.East.East.Description = "You can't go this way";
+            tmp.East.East.West = tmp.East;
 
-        tmp.South.Description = "You sit on your chair";
-        tmp.South.East = new Scene();
-        tmp.South.North = tmp;
-        tmp.South.West = new Scene();
-        tmp.South.South = new Scene();
+            tmp.South.Description = "You sit on your chair";
+            tmp.South.East = new Scene();
+            tmp.South.North = tmp;
+            tmp.South.West = new Scene();
+            tmp.South.South = new Scene();
 
-        tmp.South.East.Description = "You can't go this way";
-        tmp.South.East.West = tmp.South;
+            tmp.South.East.Description = "You can't go this way";
+            tmp.South.East.West = tmp.South;
 
-        tmp.South.West.Description = "You can't go this way";
-        tmp.South.West.East = tmp.South;
+            tmp.South.West.Description = "You can't go this way";
+            tmp.South.West.East = tmp.South;
 
-        tmp.South.South.Description = "You can't go this way";
-        tmp.South.South.North = tmp.South;
+            tmp.South.South.Description = "You can't go this way";
+            tmp.South.South.North = tmp.South;
 
-        
-        // working on an excuse path.
-        //tmp.Excuse.Description = "DO excuse";
-        //tmp.South = new Scene();
-        //tmp.North = new Scene();
 
-        currentPlayer.CurrentScene = Start_scene;
+            // working on an excuse path.
+            //tmp.Excuse.Description = "DO excuse";
+            //tmp.South = new Scene();
+            //tmp.North = new Scene();
 
+            currentPlayer.InitalizePlayerState();
+            currentPlayer.CurrentScene = Start_scene;
+
+            theService.Connect();
+            theService.SaveScenes();
+        }
 	}
 }
 

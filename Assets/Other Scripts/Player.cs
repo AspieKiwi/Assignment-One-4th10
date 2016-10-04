@@ -33,7 +33,7 @@ using System;
 // another break is used.
 
 
-
+[Serializable]
 public class Player	{
 	// Class
 	private static int _player_number = 0;
