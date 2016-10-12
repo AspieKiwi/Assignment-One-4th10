@@ -37,11 +37,11 @@ public class LogIn : MonoBehaviour
     {
         DataService theService = new DataService();
 
-       // if (theService.CheckPassword("Null", "Null"))
+       if (theService.CheckPassword(pUsername, pPassword))
 
-        //{
+        {
 
-       // }
+       }
     }
 
 }
