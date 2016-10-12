@@ -33,97 +33,81 @@ using System;
 // another break is used.
 
 
+using System;
 [Serializable]
-public class Player	{
-	// Class
-	private static int _player_number = 0;
-		
-	// Instance
-	private int _number = (Player._player_number++); 
-	private string _name;
-	private Item[] _inventory; 
-	private Scene _currentScene;
+public class Player
+{
+    // Class
+    private static int _player_number = 0;
 
-    public void InitalizePlayerState()
+    // Instance
+    private int _number = (Player._player_number++);
+    private string _name;
+    private Item[] _inventory;    // is this the right type?
+    private Scene _currentScene;
+
+    public Scene CurrentScene
     {
-        Persist.control.Experience = 0;
-        Persist.control.Health = 5;
+        get
+        {
+            return _currentScene;
+        }
+        set
+        {
+            _currentScene = value;
+        }
     }
-
-    public Player()
+    public String Name
     {
-        InitalizePlayerState();
+        get
+        {
+            return _name;
+        }
+        set
+        {
+            _name = value;
+        }
     }
-	   
-	public Scene CurrentScene{ 
-		get
-            {
-			    return _currentScene;
-		    } 
-		set
-            {
-			    _currentScene = value;
-		    }
-	}
-
-	public String Name{ 
-		get
-            {
-			    return _name;
-		    } 
-		set
-            {
-			    _name = value;
-		    }
-	}
     private void AddExperience()
     {
         Persist.control.Experience = Persist.control.Experience + 1;
     }
+    public void Move(GameModel.DIRECTION pDirection)
+    {
 
-	public void Move(GameModel.DIRECTION pDirection){
-        
-		switch(pDirection){
-			case GameModel.DIRECTION.North: // but what do we do??
-				if( _currentScene.North != null)
-					{
-						_currentScene =  _currentScene.North;
+        switch (pDirection)
+        {
+            case GameModel.DIRECTION.North: // but what do we do??
+
+                if (_currentScene.North != null)
+                {
+                    _currentScene = _currentScene.North;
                     AddExperience();
-					}
-				break;
-			case GameModel.DIRECTION.South:
-                if (_currentScene.South != null)
-                    {
-                        _currentScene = _currentScene.South;
-                    }
-                break;
-			case GameModel.DIRECTION.East:
-                if (_currentScene.East != null)
-                {
-                    _currentScene = _currentScene.East;
                 }
                 break;
-			case GameModel.DIRECTION.West:
-                if (_currentScene.West != null)
-                {
-                    _currentScene = _currentScene.West;
-                }
+            case GameModel.DIRECTION.South:
+                // AddExperience();
                 break;
-		}
-	}
+            case GameModel.DIRECTION.East:
+                break;
+            case GameModel.DIRECTION.West:
+                break;
+        }
+    }
 
+    public void InitialisePlayerState()
+    {
+        if (Persist.control != null)
+        {
+            Persist.control.Experience = 10;
+            Persist.control.Health = 5;
+        }
+    }
+    public Player()
+    {
+        //InitialisePlayerState();
+    }
+}
 
-// this is where I was working on adding in NPC communication. So far it doesn't work yet.
-    //    public void Say(GameModel.WORD pWord)
-    //{
-    //    if (_currentScene.Excuse != null)
-    //    {
-    //        _currentScene = _currentScene.Excuse;
-    //    }
-    //}
-	//	public Player ()
-	//	{
-	//	}
-	}
 
 

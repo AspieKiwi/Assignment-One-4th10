@@ -7,12 +7,16 @@ using System;
 // this is in preparation of the item use eventually being added to the game. 
 	public class Item
 	{
+		[PrimaryKey, AutoIncrement]
+		public int ItemID {get; set;}
+		public int SceneFindID {get; set;}
+		public int SceneUseID {get; set;}
+		public string Name {get; set;}
+		public string Use {get; set;}
+		public string Description {get; set;}
 
-		private string _description;
-
-		public Item ()
-		{
-		}
 	}
+	
+// what else to do in this class??
 
 

@@ -33,178 +33,105 @@ using System.Text;
 // public static Player currentPlayer does a get and a set, the get returns _player the set gives _player a value.
 
 
-public static class GameModel {
+public static class GameModel
+{
+
     private static String _name;
-	private static Player _player = new Player();
-	public enum DIRECTION  {North, South, East, West};
-    //public enum WORD { Excuse}; // just what I am working on to bring in communication with NPC
-	private static Scene _start_scene;
-	public static Players PlayersInGame = new Players();
+    private static Player _player = new Player();
+    public enum DIRECTION { North, South, East, West };
+    private static Scene _start_scene; // ??
+    public static Players PlayersInGame = new Players();
 
-    public static Scene Start_scene{
-		get 
-		    { 
-			    return _start_scene;  
-		    }
-		set
-            {
-			    _start_scene = value; 
-		    }
+    public static Scene Start_scene
+    {
+        get
+        {
+            return _start_scene;
+        }
+        set
+        {
+            _start_scene = value;
+        }
+
     }
 
-	public static string Name{
-		get 
-		    { 
-			    return _name;  
-		    }
-		set
-            {
-			    _name = value; 
-		    }
+    public static string Name
+    {
+        get
+        {
+            return _name;
+        }
+        set
+        {
+            _name = value;
+        }
+
     }
 
-	public static Player currentPlayer{
-		get
-		    {
-			    return _player;
-		    }
-		set
-		    {
-			    _player = value;
-		    }
+    public static Player currentPlayer
+    {
+        get
+        {
+            return _player;
+        }
+        set
+        {
+            _player = value;
+        }
+
     }
-
-// public static void go takes the DIRECTION from the enum list and a pDirection variable as parameters.
-// currentPlayer.Move is given the variable pDirection as a Parameter.
-	public static void go(DIRECTION pDirection)
-	    {
-		    currentPlayer.Move(pDirection);
-	    }
-
-
-    // Here I am trying to set up the public static void for handling NPC talking but I don't have it quite mastered yet.
-    //public static void word(WORD pWord)
-    //{
-    //    currentPlayer.Say(pWord);
-    //}
-
-
-
-// public keyword is an access modifier for types and type members. It's the most permissive access level.
-// Use the static modifier to declare a static member, which belongs to the type itself rather than to a specific object. 
-// when used as the return type or a method, void specifies that the method doesn't return a value.
-// void isn't allowed in the parameter list of a method.
-// public static void makeScene is the method containing the making of scenes.
-// it has the directions, if there will be a new scene and the text that will be in the new scene. 
-
-
+    public static void go(DIRECTION pDirection)
+    {
+        currentPlayer.Move(pDirection);
+    }
 
     public static void makeScenes()
-	{
-		Scene tmp;
+    {
+        Scene tmp;
         DataService theService = new DataService();
 
+        // uncomment the following two lines to start with an empty database
+        //if(theService.DbExists("GameNameDb"))
+        //	theService.deleteDatabaseFile();
+
+        // Watch out DbExists has a side effect!
         if (theService.DbExists("GameNameDb"))
         {
             theService.Connect();
             theService.LoadScenes();
-            currentPlayer.InitalizePlayerState();
+            currentPlayer.InitialisePlayerState();
             currentPlayer.CurrentScene = Scene.AllScenes[0];
         }
         else
         {
             Start_scene = new Scene();
 
-            Start_scene.Scenename = "TextIO";
             tmp = new Scene();
-
-            Start_scene.ID = 1; // do more of these
+            Start_scene.ID = 1;
             Start_scene.North = tmp;
-            Start_scene.West = tmp;
-            Start_scene.South = tmp;
-            Start_scene.East = tmp;
-            Start_scene.Description = "You are at the front of the class with your teacher";
+            Start_scene.Description = " You are lost in a forest";
+
+            tmp.ID = 2;
+            tmp.Description = " You are in the Mall";
+            tmp.South = Start_scene;
 
 
-            tmp.Description = "You walk back to your desk";
-            //tmp.Excuse = new Scene(); // working on this excuse path
-            tmp.South = new Scene();
-            tmp.East = new Scene();
-            tmp.West = new Scene();
             tmp.North = new Scene();
+            tmp.North.ID = 3;
+            tmp.North.Description = "You fell off a cliff";
+            tmp.North.South = tmp;// ??
 
-            tmp.North.Description = "You fell on your desk";
-            tmp.North.South = tmp;
-            tmp.North.North = new Scene();
-            tmp.North.West = new Scene();
-            tmp.North.East = new Scene();
-
-            tmp.North.North.Description = "You can't go this way";
-            tmp.North.North.South = tmp.North;
-
-            tmp.North.West.Description = "You can't go this way";
-            tmp.North.West.East = tmp.North;
-
-            tmp.North.East.Description = "You can't go this way";
-            tmp.North.East.West = tmp.North;
-
-            tmp.West.Description = "You fell out the window";
-            tmp.West.North = new Scene();
-            tmp.West.South = new Scene();
-            tmp.West.East = tmp;
-            tmp.West.West = new Scene();
-
-            tmp.West.North.Description = "You can't go this way";
-            tmp.West.North.South = tmp.West;
-
-            tmp.West.South.Description = "You can't go this way";
-            tmp.West.South.North = tmp.West;
-
-            tmp.West.West.Description = "You can't go this way";
-            tmp.West.West.East = tmp.West;
-
-            tmp.East.Description = "You walk into your teacher";
-            tmp.East.West = tmp;
-            tmp.East.South = new Scene();
-            tmp.East.North = new Scene();
-            tmp.East.East = new Scene();
-
-            tmp.East.South.Description = "You can't go this way";
-            tmp.East.South.North = tmp.East;
-
-            tmp.East.North.Description = "You can't go this way";
-            tmp.East.North.South = tmp.East;
-
-            tmp.East.East.Description = "You can't go this way";
-            tmp.East.East.West = tmp.East;
-
-            tmp.South.Description = "You sit on your chair";
-            tmp.South.East = new Scene();
-            tmp.South.North = tmp;
-            tmp.South.West = new Scene();
-            tmp.South.South = new Scene();
-
-            tmp.South.East.Description = "You can't go this way";
-            tmp.South.East.West = tmp.South;
-
-            tmp.South.West.Description = "You can't go this way";
-            tmp.South.West.East = tmp.South;
-
-            tmp.South.South.Description = "You can't go this way";
-            tmp.South.South.North = tmp.South;
-
-
-            // working on an excuse path.
-            //tmp.Excuse.Description = "DO excuse";
-            //tmp.South = new Scene();
-            //tmp.North = new Scene();
-
-            currentPlayer.InitalizePlayerState();
+            currentPlayer.InitialisePlayerState();
             currentPlayer.CurrentScene = Start_scene;
+
 
             theService.Connect();
             theService.SaveScenes();
         }
-	}
+
+    }
+
+
 }
+
 
