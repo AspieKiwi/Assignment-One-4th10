@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f0381c1f10c8f2343a43bc3790eab6d0
+timeCreated: 1476245596
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - Username: {fileID: 11401026, guid: ac6f3c08f758b3a45a81fd1e4b34cfe6, type: 2}
+  - Password: {fileID: 11424916, guid: cecb20a99658de74cb3bac608e0c7493, type: 2}
+  - pUsername: {fileID: 11455894, guid: ac6f3c08f758b3a45a81fd1e4b34cfe6, type: 2}
+  - pPassword: {fileID: 11468364, guid: cecb20a99658de74cb3bac608e0c7493, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

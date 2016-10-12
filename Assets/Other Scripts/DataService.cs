@@ -280,6 +280,13 @@ public class DataService  {
 		return _connection.Table<Person>().Where(x => x.Name == "Roberto");
 	}
 
+    public Person CheckPassword(string pStrName, string pStrPassword)
+    {
+        return _connection.Table<Person>().Where(x => x.Name == pStrName && x.Password == pStrPassword).FirstOrDefault();
+        // if what = null then "debug" ? but what will be equalling no and how to do I call to this?
+    }
+
+
 	public Person GetJohnny(){
 		return _connection.Table<Person>().Where(x => x.Name == "Johnny").FirstOrDefault();
 	}

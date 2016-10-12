@@ -1,6 +1,6 @@
 ﻿using SQLite4Unity3d;
 
-public class Person  {
+public class SceneDiagloue  {
 
 	[PrimaryKey, AutoIncrement]
 	public int SceneDialogueID {get; set;}

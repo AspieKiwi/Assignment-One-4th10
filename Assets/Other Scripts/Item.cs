@@ -3,9 +3,10 @@
 // events and event handlers, interfaces, attributes, and processing exceptions.
 
 using System;
+using SQLite4Unity3d;
 
 // this is in preparation of the item use eventually being added to the game. 
-	public class Item
+public class Item
 	{
 		[PrimaryKey, AutoIncrement]
 		public int ItemID {get; set;}

@@ -87,7 +87,7 @@ public class TextInput : MonoBehaviour
 		ce.AddListener(ChangeInput);
 		*/
         input.onEndEdit = se;
-        output.text = GameModel.currentPlayer.CurrentScene.Description;
+          output.text = GameModel.currentPlayer.CurrentScene.Description;
         //input.onValueChanged = ce;
 
     }

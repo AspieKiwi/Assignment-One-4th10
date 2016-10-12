@@ -116,6 +116,11 @@ public class Scene{
         }
     }
 
+    public Scene()
+    {
+        Scene.AllScenes.Add(this);
+    }
+
 
 
 

@@ -1,6 +1,6 @@
 ﻿using SQLite4Unity3d;
 
-public class GamePlayer  {
+public class GamePlayers  {
 
 	[PrimaryKey] // how do you set this up for a joining table?
 	public int PlayerId {get; set;} // do I need this?

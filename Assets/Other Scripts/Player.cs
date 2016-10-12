@@ -33,7 +33,7 @@ using System;
 // another break is used.
 
 
-using System;
+
 [Serializable]
 public class Player
 {
@@ -78,7 +78,6 @@ public class Player
         switch (pDirection)
         {
             case GameModel.DIRECTION.North: // but what do we do??
-
                 if (_currentScene.North != null)
                 {
                     _currentScene = _currentScene.North;
@@ -86,11 +85,22 @@ public class Player
                 }
                 break;
             case GameModel.DIRECTION.South:
-                // AddExperience();
+                if (_currentScene.South != null)
+                {
+                    _currentScene = _currentScene.South;
+                }
                 break;
             case GameModel.DIRECTION.East:
+                if (_currentScene.East != null)
+                {
+                    _currentScene = _currentScene.East;
+                }
                 break;
             case GameModel.DIRECTION.West:
+                if (_currentScene.West != null)
+                {
+                    _currentScene = _currentScene.West;
+                }
                 break;
         }
     }
