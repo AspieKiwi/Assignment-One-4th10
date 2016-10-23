@@ -1,26 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DataServiceUtilities : MonoBehaviour {
+public class DataServiceUtilities : MonoBehaviour
+{
 
-	public void DeleteDB(){
+    // delete database conncetion to SQLite
+	public void DeleteDB()
+    {
 		DataService _connection = new DataService();
-		if(_connection.DbExists("GameNameDb")){
+		if(_connection.DbExists("NeverLDb"))
+        {
 			_connection.deleteDatabaseFile();
 		}
 	}
 
-	public void Save(){
+    // save database connection to SQLite
+	public void Save()
+    {
 		DataService _connection = new DataService();
-		if(_connection.DbExists("GameNameDb")){
+		if(_connection.DbExists("NeverLDb"))
+        {
 			_connection.Connect();
 			_connection.SaveScenes();
 		}
 	}
-
-	public void Load(){
+    // load database connection to SQLite
+	public void Load()
+    {
 		DataService _connection = new DataService();
-		if(_connection.DbExists("GameNameDb")){
+		if(_connection.DbExists("NeverLDb"))
+        {
 			_connection.Connect();
 			_connection.LoadScenes();
 		}

@@ -1,51 +1,18 @@
-﻿// using imports namespace. (Namespace is a collection of classes and other data types that are used to categorize the library.)
-// The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types,
-// events and event handlers, interfaces, attributes, and processing exceptions.
-
-using System;
-
-// public keyword is an access modifier for types and type members. It's the most permissive access level.
-// class is a construct that enables you to create your own custom types by grouping together variables of other types, methods and events.
-// Player is a Class.
-// private is access limited to the containing type.
-// Use the static modifier to declare a static member, which belongs to the type itself rather than to a specific object. 
-// int keyword denotes an integral type
-// private static int _player_number is set to equal to 0.
-// private int _number is set to equal the _player_number within player.
-// string type represents a sequence of zero or more Unicode characters.
-// a private string is created that is given the name, _name
-// a private type of class Item[] called _inventory is created, but this wont be used to later on.
-// a private type of class Scene called _currentScene is created.
-// public Scene CurrentScene has a get that returns the _currentScene and a set that gives a value to the _currentScene.
-// public String Name has a get that returns the _name and a set that gives a value to the _name. _name is a string.
-// public void Move has the parameters of GameModel.DIRECTION and pDirection.
-// GameModel.DIRECTION is from the GameModel Class.
-// pDirection is a variable set in the GameModel.DIRECTION.
-// switch statement is a control statement that selects a switch section to execute from a list of candidates.
-// switch statement includes one or more switch sections. Each switch section contains one or more case labels followed by one or more statements. 
-// a switch is set with a parameter of the pDirection.
-// then a case of if the pDirection = North. (GameModel.DIRECTION.North).
-// an if statement follows checking if _currentScene.North is not equal to null then the _currentScene is set to equalling _currentScene.North.
-// break statement terminates the closest enclosing loop or switch statement in which it appears. Control is passed to the statement that follows the terminated statement, if any.
-// a break is then set after this if statement.
-// then a similar case is set with the pDirection equal to South.
-// another similar if statement is used with _currentScene eventually equaling to _currentScene.South.
-// another break is used.
-
-
+﻿using System;
 
 [Serializable]
 public class Player
 {
     // Class
-    private static int _player_number = 0;
+    //private static int _player_number = 0;
 
     // Instance
-    private int _number = (Player._player_number++);
+    //private int _number = (Player._player_number++);
     private string _name;
-    private Item[] _inventory;    // is this the right type?
-    private Scene _currentScene;
+    private Item[] _inventory;  
+    public Scene _currentScene;
 
+    // returns and sets the current Scene
     public Scene CurrentScene
     {
         get
@@ -57,6 +24,8 @@ public class Player
             _currentScene = value;
         }
     }
+
+    // returns and sets a name
     public String Name
     {
         get
@@ -68,10 +37,14 @@ public class Player
             _name = value;
         }
     }
+
+    // adds expierence using the persist
     private void AddExperience()
     {
         Persist.control.Experience = Persist.control.Experience + 1;
     }
+
+    // where the player has moved to within the gameModel
     public void Move(GameModel.DIRECTION pDirection)
     {
 
@@ -105,6 +78,7 @@ public class Player
         }
     }
 
+    // initialisation of the player state of persist
     public void InitialisePlayerState()
     {
         if (Persist.control != null)
@@ -113,9 +87,12 @@ public class Player
             Persist.control.Health = 5;
         }
     }
+
+
+    // triggers the above initalisation 
     public Player()
     {
-        //InitialisePlayerState();
+        InitialisePlayerState();
     }
 }
 

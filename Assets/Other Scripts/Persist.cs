@@ -5,14 +5,18 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine.UI;
 
-public class Persist : MonoBehaviour {
+// persist handles the health and exp of the player. It sets the inital health and exp and then updates the values as the
+// player moves through the game.
+public class Persist : MonoBehaviour
+{
 	public static Persist control; 
 	private float health; 
 	private float experience;
     public Text HealthText;
     public Text ExperienceText;
 
-    public float Health{
+    public float Health
+    {
         get
         {
             return health;
@@ -39,7 +43,8 @@ public class Persist : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 		// PLAYER PREFS
 		// PlayerPrefs.SetInt("health",21);
 		//int health = PlayerPrefs.GetInt("health");
@@ -50,12 +55,15 @@ public class Persist : MonoBehaviour {
 	}
 
 	// Now there can be only one of
-	void Awake(){
-		if( control == null){
+	void Awake()
+    {
+		if( control == null)
+        {
 			DontDestroyOnLoad(gameObject);
 			control = this;
 		}
-		else if(control!= this){
+		else if(control!= this)
+        {
 			Destroy(gameObject);
 		}
 
@@ -70,7 +78,8 @@ public class Persist : MonoBehaviour {
 	
 	//}
 
-	public void Save(){
+	public void Save()
+    {
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 
@@ -81,7 +90,8 @@ public class Persist : MonoBehaviour {
 		file.Close();
 	}
 
-	public void Load(){
+	public void Load()
+    {
 		if(File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
 		{
 			BinaryFormatter bf = new BinaryFormatter();

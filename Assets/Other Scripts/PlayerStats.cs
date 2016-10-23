@@ -1,18 +1,108 @@
-﻿using SQLite4Unity3d;
+﻿using System;
+using System.Collections.Generic;
 
-public class PlayerStats  {
 
-	[PrimaryKey]
-	public int PlayerId {get; set;} // do I need this?
-	public string StatusName {get; set;}
-	public string Changed {get; set;}
-	public int Value {get; set;}
-	
-	// what else do I need to do in this class?
-	
+public class PlayerStats
+{
+    private int _Id;
+    private string _StatusName;
+    private string _Changed;
+    private int _Value;
+    private static List<PlayerStats> allStats = new List<PlayerStats>();
+    private PlayerStats _connected_stats = new PlayerStats();
 
-	//public override string ToString ()
-	//{
-	//	return string.Format ("[Person: Id={0}, Name={1},  Surname={2}, Age={3}]", Id, Name, Surname, Age);
-	//}
+
+    // gets and sets the PlayerStats ID
+    public int Id
+    {
+        get
+        {
+            return _Id;
+        }
+
+        set
+        {
+            _Id = value;
+        }
+    }
+
+
+    // gets and sets the PlayerStats StatusName
+    public string StatusName
+    {
+        get
+        {
+            return _StatusName;
+        }
+
+        set
+        {
+            _StatusName = value;
+        }
+    }
+
+
+    // gets and sets the PlayerStats Changed
+    public string Changed
+    {
+        get
+        {
+            return _Changed;
+        }
+
+        set
+        {
+            _Changed = value;
+        }
+    }
+
+
+    // gets and sets the PlayerStats Value
+    public int Value
+    {
+        get
+        {
+            return _Value;
+        }
+
+        set
+        {
+            _Value = value;
+        }
+    }
+
+
+    // gets and sets the Connected_stats which is needed for data service
+    public PlayerStats Connected_stats
+    {
+        get
+        {
+            return _connected_stats;
+        }
+
+        set
+        {
+            _connected_stats = value;
+        }
+    }
+
+    // gets and sets the AllStats List
+    public static List<PlayerStats> AllStats
+    {
+        get
+        {
+            return allStats;
+        }
+
+        set
+        {
+            allStats = value;
+        }
+    }
+
+    // adds the Player stats to the all stats list.
+    public PlayerStats()
+    {
+        PlayerStats.AllStats.Add(this);
+    }
 }

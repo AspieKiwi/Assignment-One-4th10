@@ -1,47 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LogIn : MonoBehaviour
 {
-    public InputField Username;
-    public InputField Password;
-    public Text pUsername;
-    public Text pPassword;
+    public Text UserName;
+    public Text Password;
     public InputField.SubmitEvent se;
     public InputField.SubmitEvent sv;
     public InputField.OnChangeEvent ce;
 
 
-
-    public void TextUpdate (string pStrName, string pPassword)
+    // the log in that takes the two input boxes and checks them within the DataService
+    public void Login()
     {
-        Username.text = pStrName;
-        Password.text = pPassword;
-    }
+        string pUsername = UserName.text;
+        string pPassword = Password.text;
 
-    void Start()
-    {
-        Username = this.GetComponent<InputField>();
-        Password = this.GetComponent<InputField>();
-        se = new InputField.SubmitEvent();
-        sv = new InputField.SubmitEvent();
-        //se.AddListener(SubmitInput);
-       // sv.AddListener(SubmitInput);
-        Username.onEndEdit = se;
-        Password.onEndEdit = sv;
-
-    }
-
-    private void SubmitInput(string pUsername, string pPassword)
-    {
-        DataService theService = new DataService();
-
-       if (theService.CheckPassword(pUsername, pPassword))
-
+        DataService aDS = new DataService();
+        if (aDS.DbExists("GameNameDb"))
         {
-
-       }
+            aDS.Connect();
+            if (aDS.CheckPassword(pUsername, pPassword))
+            {
+                SceneManager.LoadScene("TextIO");
+            }
+            else
+            {
+                Debug.Log("Incorrect Name/Password");
+            }
+        }
     }
-
 }
+
+
+
+

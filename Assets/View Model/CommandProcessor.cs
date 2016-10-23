@@ -1,39 +1,15 @@
-﻿//using imports namespace. (Namespace is a collection of classes and other data types that are used to categorize the library.)
-// The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types,
-// events and event handlers, interfaces, attributes, and processing exceptions.
-// UnityEngine is a collection of all the classes related to Unity.
-// System.Collections is all the classes in .Net related to holding groups of data such as hashtable and array list.
-// System.Collections.Generic namespace contains interfaces and classes that define generic collections.
-// System.IO namespace contains types that allow reading and writing to files and data streams,
-// and types that provide basic file and directory support.
-
-using System;
+﻿using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
 using System.IO;
-
-
-// public keyword is an access modifier for types and type members. It's the most permissive access level.
-// there are no restrictions on accessing public members.
-// delegate is a type that represents references to methods with a particular parameter list and return type.
-// when used as the return type or a method, void specifies that the method doesn't return a value.
-// void isn't allowed in the parameter list of a method.
-// public delegate void aDisplayer is created and it takes a parameter of String and value.
-// class is a construct that enables you to create your own custom types by grouping together variables of other types, methods and events.
-// CommandProcessor is a public class.
-// public void Parse has the parameters of String pCmdStr and aDisplayer display.
-// a string is created and given the name strResult and the value of = "Do not understand".
-// char keyword is used to declare an instance of the System.Char structure that the .NET Framework uses to represent a Unicode character.
-// a char is created which is given the name charSeparators and given the value of new char[] {' '}
-// pCmdStr is given the value of pCmdStr.ToLower.
-// a string is created and given the name parts. It's then given the value of pCmdStr.Split(charSeparators,StringSplitOptions.RemoveEmptyEntries)
-
-
 
 public delegate void aDisplayer(String value);
 
+
+// when a command is input into the input box, the command processor takes this command into 
+// a switch which then sends back to the gameModel that this specific command has been entered.
+// such as Go North. 
 public class CommandProcessor
 {
     public CommandProcessor()
@@ -57,28 +33,30 @@ public class CommandProcessor
                     {
                         Debug.Log("Got Pick up");
                         strResult = "Got Pick up";
-
-                        if (parts.Length == 3)
-                        {
-                            String param = parts[2];
-                        }// do pick up command
-                         // GameModel.Pickup();
+                        //var itemsinscene = Item.AllItems.Find(x => x.SceneFindID = GameModel.currentPlayer.CurrentScene.ID);
+                        //if itemsinscene = 
                     }
                     break;
-                case "go":
+                case "go": // here is when the case in the switch is go
                     switch (parts[1])
                     {
-                        case "north":
+                        case "north": // this is triggered if it is North
                             Debug.Log("Got go North");
-                            // strResult = "Got Go North";
                             GameModel.go(GameModel.DIRECTION.North);
-
                             break;
-                        case "south":
+                        case "south": // this is triggered if it is South
                             Debug.Log("Got go South");
-                            strResult = "Got Go South";
+                            GameModel.go(GameModel.DIRECTION.South);
                             break;
-                        default:
+                        case "east":// this is triggered if it is East
+                            Debug.Log("Got go East"); 
+                            GameModel.go(GameModel.DIRECTION.East);
+                            break;
+                        case "west": // this is triggered if it is West
+                            Debug.Log("Got go West");
+                            GameModel.go(GameModel.DIRECTION.West);
+                            break;
+                        default: // this is triggered if they enter in a different command next to the go
                             Debug.Log(" do not know how to go there");
                             strResult = "Do not know how to go there";
                             break;
@@ -87,8 +65,8 @@ public class CommandProcessor
                     strResult = GameModel.currentPlayer.CurrentScene.Description;
                     display(strResult);
                     break;
-                default:
-                    Debug.Log("Do not understand");
+                    default:
+                    Debug.Log("Do not understand"); // this is triggered if it does not understand your input
                     strResult = "Do not understand";
                     break;
 

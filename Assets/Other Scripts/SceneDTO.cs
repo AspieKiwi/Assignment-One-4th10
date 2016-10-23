@@ -1,7 +1,7 @@
 ﻿using System;
 using SQLite4Unity3d;
 
-public class SceneDTO
+public class SceneDTO // SceneDTO table set up, created into a data table in the data service
 {
 	[PrimaryKey]
 	public int SceneID{ get; set;} 
@@ -14,7 +14,7 @@ public class SceneDTO
 		return string.Format ("[Scene: SceneID={0}, GameID={1},  Name={2}, Story={3}]", SceneID, GameID, Name, Story);
 	}
 }
-public class SceneToSceneDTO
+public class SceneToSceneDTO // SceneToSceneDTO set up, created into a data table in the data service.
 {
 	[PrimaryKey][AutoIncrement]
 	public int Id{ get; set;} 
